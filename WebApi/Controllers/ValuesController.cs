@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+//using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.Users;
+using Newtonsoft;
 
 namespace WebApi.Controllers
 {
@@ -10,6 +13,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -21,7 +25,7 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return "value1";//value
         }
 
         // POST api/values
@@ -42,4 +46,5 @@ namespace WebApi.Controllers
         {
         }
     }
+
 }

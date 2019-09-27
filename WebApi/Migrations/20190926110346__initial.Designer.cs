@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Models.Domain;
 
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20190926110346__initial")]
+    partial class _initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,14 +59,6 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Users.User", b =>
                 {
-<<<<<<< HEAD
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("PasswordHash");
-=======
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
@@ -76,7 +70,6 @@ namespace WebApi.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired();
->>>>>>> 5f991939d27868d48c0aadf9e3ade27fa2069771
 
                     b.HasKey("Id");
 

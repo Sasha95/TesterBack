@@ -25,6 +25,7 @@ namespace WebApi.Controllers
             _signInManager = signInManager;
             _context = context;
 
+
             //if (!_context.User.Any())
             //{
             //    _context.User.Add(new User { Email = "admin@mail.ru", Password = "123" });
@@ -38,6 +39,7 @@ namespace WebApi.Controllers
         {
             return await _context.User.ToListAsync();
         }
+
 
         // GET: api/Users/5
         //[HttpGet("{id}")]
@@ -79,6 +81,7 @@ namespace WebApi.Controllers
             if (ModelState.IsValid)
             {
                 User user = new User { Email = model.Email, UserName = model.Email };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -91,14 +94,6 @@ namespace WebApi.Controllers
 
             return BadRequest();
 
-            //if (user == null)
-            //{
-            //    return BadRequest();
-            //}
-
-            //_context.User.Add(user);
-            //_context.SaveChangesAsync();
-            //return Ok(user);
         }
 
         //// DELETE: api/Users/5

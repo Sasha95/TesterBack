@@ -18,6 +18,7 @@ namespace WebApi.Models.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+<<<<<<< HEAD
             modelBuilder.Entity<User>().Ignore(b => b.UserName);
             modelBuilder.Entity<User>().Ignore(b => b.NormalizedUserName);
             modelBuilder.Entity<User>().Ignore(b => b.LockoutEnabled);
@@ -32,6 +33,22 @@ namespace WebApi.Models.Domain
             modelBuilder.Entity<User>().Ignore(b => b.EmailConfirmed);
             modelBuilder.Entity<User>().Ignore(b => b.ConcurrencyStamp);
             modelBuilder.Entity<User>().Ignore(b => b.AccessFailedCount);
+=======
+            //modelBuilder.Entity<User>().Ignore(b => b.UserName);
+            //modelBuilder.Entity<User>().Ignore(b => b.NormalizedUserName);
+            //modelBuilder.Entity<User>().Ignore(b => b.LockoutEnabled);
+            //modelBuilder.Entity<User>().Ignore(b => b.LockoutEnd);
+            //modelBuilder.Entity<User>().Ignore(b => b.NormalizedEmail);
+            //modelBuilder.Entity<User>().Ignore(b => b.NormalizedUserName);
+            //modelBuilder.Entity<User>().Ignore(b => b.Password);
+            //modelBuilder.Entity<User>().Ignore(b => b.PhoneNumber);
+            //modelBuilder.Entity<User>().Ignore(b => b.PhoneNumberConfirmed);
+            //modelBuilder.Entity<User>().Ignore(b => b.SecurityStamp);
+            //modelBuilder.Entity<User>().Ignore(b => b.TwoFactorEnabled);
+            //modelBuilder.Entity<User>().Ignore(b => b.EmailConfirmed);
+            //modelBuilder.Entity<User>().Ignore(b => b.ConcurrencyStamp);
+            //modelBuilder.Entity<User>().Ignore(b => b.AccessFailedCount);
+>>>>>>> 5f991939d27868d48c0aadf9e3ade27fa2069771
             //string adminRoleName = "admin";
             //string studentRoleName = "student";
             //string superAdmin = "super_admin";

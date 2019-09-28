@@ -25,6 +25,9 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>();
+
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //    .AddJwtBearer(option =>
             //    {
@@ -48,15 +51,15 @@ namespace WebApi
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 });
 
-            services.AddIdentity<User, IdentityRole>(option =>
-                {
-                    option.Password.RequireDigit = false;
-                    option.Password.RequiredLength = 6;
-                    option.Password.RequireNonAlphanumeric = false;
-                    option.Password.RequireUppercase = false;
-                    option.Password.RequireLowercase = false;
-                })
-                .AddEntityFrameworkStores<ApplicationContext>();
+            //services.AddIdentity<User, IdentityRole>(option =>
+            //    {
+            //        option.Password.RequireDigit = false;
+            //        option.Password.RequiredLength = 6;
+            //        option.Password.RequireNonAlphanumeric = false;
+            //        option.Password.RequireUppercase = false;
+            //        option.Password.RequireLowercase = false;
+            //    })
+            //    .AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddMvc();
         }
@@ -64,9 +67,6 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

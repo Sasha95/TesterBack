@@ -12,8 +12,13 @@
         
         <h2>Список пользователей</h2>
         <form name="userForm">
+<<<<<<< HEAD
+            <input type="hidden" name="id" value="0" width="100"/>
+            <div class="form-group" > 
+=======
             <input type="hidden" name="id" value="0" width="100" />
             <div class="form-group">
+>>>>>>> 5f991939d27868d48c0aadf9e3ade27fa2069771
                 <label for="email_lable">Email:</label>
                 <input class="form-control" name="email" />
             </div>
@@ -21,10 +26,13 @@
                 <label for="pass">Password:</label>
                 <input class="form-control" name="password" />
             </div>
+<<<<<<< HEAD
+=======
             <div class="form-group">
                 <label for="pass">Password:</label>
                 <input class="form-control" name="confirmPassword" />
             </div>
+>>>>>>> 5f991939d27868d48c0aadf9e3ade27fa2069771
             <div class="panel-body">
                 <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
                 <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
@@ -67,7 +75,11 @@
             });
         }
         // Добавление пользователя
+<<<<<<< HEAD
+        function CreateUser(userEmail, userPassword) {
+=======
         function CreateUser(userEmail, userPassword, confirmPassword) {
+>>>>>>> 5f991939d27868d48c0aadf9e3ade27fa2069771
             $.ajax({
                 url: "api/users",
                 contentType: "application/json",
@@ -75,7 +87,11 @@
                 data: JSON.stringify({
                     email: userEmail,
                     password: userPassword,
+<<<<<<< HEAD
+                    //confirm_password: confirmPassword
+=======
                     confirmPassword: confirmPassword
+>>>>>>> 5f991939d27868d48c0aadf9e3ade27fa2069771
                 }),
                 success: function () {
                     reset();
@@ -141,6 +157,14 @@
             var id = this.elements["id"].value;
             var email = this.elements["email"].value;
             var password = this.elements["password"].value;
+<<<<<<< HEAD
+            //var confirm_password = this.elements["confirm_password"].value;
+            //alert(1);
+            if (id == 0)
+                CreateUser(email, password);
+            else
+                EditUser(id, email, password);
+=======
             var confirm_password = this.elements["confirmPassword"].value;
             
             if (id == 0) {
@@ -148,6 +172,7 @@
             }
             else
                 EditUser(id, email, password, confirm_password);
+>>>>>>> 5f991939d27868d48c0aadf9e3ade27fa2069771
         });
 
         // нажимаем на ссылку Изменить

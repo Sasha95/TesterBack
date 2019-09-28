@@ -15,15 +15,16 @@ namespace WebApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        //private readonly ApplicationContext _context;
+        private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public UsersController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UsersController(ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-           // _context = context;
+            _context = context;
+
 
             //if (!_context.User.Any())
             //{
@@ -33,11 +34,12 @@ namespace WebApi.Controllers
         }
 
         // GET: api/Users
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<User>>> GetUser()
-        //{
-        //    return await _context.User.ToListAsync();
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        {
+            return await _context.User.ToListAsync();
+        }
+
 
         // GET: api/Users/5
         //[HttpGet("{id}")]
@@ -54,23 +56,23 @@ namespace WebApi.Controllers
         //}
 
         // PUT: api/Users
-        //[HttpPut]
-        //public IActionResult Put([FromBody]User user)
-        //{
-        //    if (user == null)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut]
+        public IActionResult Put([FromBody]User user)
+        {
+            if (user == null)
+            {
+                return BadRequest();
+            }
 
-        //    if (!_context.User.Any(x => x.Id == user.Id))
-        //    {
-        //        return NotFound();
-        //    }
+            if (!_context.User.Any(x => x.Id == user.Id))
+            {
+                return NotFound();
+            }
 
-        //    _context.Update(user);
-        //    _context.SaveChangesAsync();
-        //    return Ok(user);
-        //}
+            _context.Update(user);
+            _context.SaveChangesAsync();
+            return Ok(user);
+        }
 
         // POST: api/Users
         [HttpPost]

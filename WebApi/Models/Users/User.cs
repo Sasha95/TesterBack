@@ -20,9 +20,5 @@ namespace WebApi.Models.Users
         [Display(Name = "Подтвердить пароль")]
         public string ConfirmPassword { get; set; }
 
-        //public int UserRoleId { get; set; }
-        //public UserRole UserRole { get; set; }
-
-
     }
 }

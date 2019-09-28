@@ -47,9 +47,9 @@ namespace WebApi.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
                     ConfirmPassword = table.Column<string>(nullable: false)
                 },
                 constraints: table =>

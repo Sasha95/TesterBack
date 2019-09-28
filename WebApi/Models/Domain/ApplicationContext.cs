@@ -18,20 +18,20 @@ namespace WebApi.Models.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<User>().Ignore(b => b.UserName);
-            //modelBuilder.Entity<User>().Ignore(b => b.NormalizedUserName);
-            //modelBuilder.Entity<User>().Ignore(b => b.LockoutEnabled);
-            //modelBuilder.Entity<User>().Ignore(b => b.LockoutEnd);
-            //modelBuilder.Entity<User>().Ignore(b => b.NormalizedEmail);
-            //modelBuilder.Entity<User>().Ignore(b => b.NormalizedUserName);
-            //modelBuilder.Entity<User>().Ignore(b => b.Password);
-            //modelBuilder.Entity<User>().Ignore(b => b.PhoneNumber);
-            //modelBuilder.Entity<User>().Ignore(b => b.PhoneNumberConfirmed);
-            //modelBuilder.Entity<User>().Ignore(b => b.SecurityStamp);
-            //modelBuilder.Entity<User>().Ignore(b => b.TwoFactorEnabled);
-            //modelBuilder.Entity<User>().Ignore(b => b.EmailConfirmed);
-            //modelBuilder.Entity<User>().Ignore(b => b.ConcurrencyStamp);
-            //modelBuilder.Entity<User>().Ignore(b => b.AccessFailedCount);
+            modelBuilder.Entity<User>().Ignore(b => b.UserName);
+            modelBuilder.Entity<User>().Ignore(b => b.NormalizedUserName);
+            modelBuilder.Entity<User>().Ignore(b => b.LockoutEnabled);
+            modelBuilder.Entity<User>().Ignore(b => b.LockoutEnd);
+            modelBuilder.Entity<User>().Ignore(b => b.NormalizedEmail);
+            modelBuilder.Entity<User>().Ignore(b => b.NormalizedUserName);
+            modelBuilder.Entity<User>().Ignore(b => b.Password);
+            modelBuilder.Entity<User>().Ignore(b => b.PhoneNumber);
+            modelBuilder.Entity<User>().Ignore(b => b.PhoneNumberConfirmed);
+            modelBuilder.Entity<User>().Ignore(b => b.SecurityStamp);
+            modelBuilder.Entity<User>().Ignore(b => b.TwoFactorEnabled);
+            modelBuilder.Entity<User>().Ignore(b => b.EmailConfirmed);
+            modelBuilder.Entity<User>().Ignore(b => b.ConcurrencyStamp);
+            modelBuilder.Entity<User>().Ignore(b => b.AccessFailedCount);
             //string adminRoleName = "admin";
             //string studentRoleName = "student";
             //string superAdmin = "super_admin";

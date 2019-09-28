@@ -57,17 +57,15 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Users.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConfirmPassword")
                         .IsRequired();
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("PasswordHash");
 
                     b.HasKey("Id");
 

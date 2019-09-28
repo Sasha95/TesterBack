@@ -78,7 +78,7 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, ConfirmPassword = model.Password };
+                User user = new User { Email = model.Email, ConfirmPassword = model.Password, UserName = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

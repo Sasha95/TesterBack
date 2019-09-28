@@ -48,15 +48,15 @@ namespace WebApi
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 });
 
-            //services.AddIdentity<UserManager<User>, IdentityRole>(option =>
-            //    {
-            //        option.Password.RequireDigit = false;
-            //        option.Password.RequiredLength = 6;
-            //        option.Password.RequireNonAlphanumeric = false;
-            //        option.Password.RequireUppercase = false;
-            //        option.Password.RequireLowercase = false;
-            //    })
-            //    .AddEntityFrameworkStores<ApplicationContext>();
+            services.AddIdentity<User, IdentityRole>(option =>
+                {
+                    option.Password.RequireDigit = false;
+                    option.Password.RequiredLength = 6;
+                    option.Password.RequireNonAlphanumeric = false;
+                    option.Password.RequireUppercase = false;
+                    option.Password.RequireLowercase = false;
+                })
+                .AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddMvc();
         }
@@ -81,7 +81,7 @@ namespace WebApi
             app.UseMvcWithDefaultRoute();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

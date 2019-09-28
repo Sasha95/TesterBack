@@ -7,15 +7,8 @@ using System.Threading.Tasks;
 
 namespace WebApi.Models.Users
 {
-    public class User 
+    public class User : IdentityUser
     {
-        [Key]
-        public Guid Id { get; set; }
-
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]

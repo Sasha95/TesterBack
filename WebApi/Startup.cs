@@ -25,38 +25,43 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(option =>
-            //    {
-            //        option.RequireHttpsMetadata = true;
-            //        option.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuer = true,
-            //            ValidIssuer = AuthOptions.ISSUER,
-            //            ValidateAudience = true,
-            //            ValidAudience = AuthOption.AUDIENCE,
-            //            ValidateLifetime = true,
-            //            IssuerSigningKey = AuthOption.GetSymmetricSecurityKey(),
-            //            ValidateIssuerSigningKey = true
-            //        };
-            //    });
+            //добавляем серсив для валидации пользователей
+            services.AddTransient<IUserValidator<User>, CustomUserValidator>();
 
-            //???
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(option =>
+                {
+                    option.RequireHttpsMetadata = true;
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthOptions.ISSUER,
+                        ValidateAudience = true,
+                        ValidAudience = AuthOptions.AUDIENCE,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true
+                    };
+                });
+
+            //добвляем контекст для работы с бд
             services.AddDbContext<ApplicationContext>
                 (options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 });
 
-            //services.AddIdentity<UserManager<User>, IdentityRole>(option =>
-            //    {
-            //        option.Password.RequireDigit = false;
-            //        option.Password.RequiredLength = 6;
-            //        option.Password.RequireNonAlphanumeric = false;
-            //        option.Password.RequireUppercase = false;
-            //        option.Password.RequireLowercase = false;
-            //    })
-            //    .AddEntityFrameworkStores<ApplicationContext>();
+            //добавляем сервис для управления и настройки пользователей
+            services.AddIdentity<User, IdentityRole>(option =>
+                {
+                    option.User.RequireUniqueEmail = true;
+                    option.Password.RequireDigit = false;
+                    option.Password.RequiredLength = 6;
+                    option.Password.RequireNonAlphanumeric = false;
+                    option.Password.RequireUppercase = false;
+                    option.Password.RequireLowercase = false;
+                })
+                .AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddMvc();
         }
@@ -64,9 +69,6 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -77,11 +79,12 @@ namespace WebApi
                 app.UseHsts();
             }
 
+            //используем добавленые сервисы
             app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

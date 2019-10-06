@@ -7,7 +7,7 @@ namespace WebApi.Models.Users
 {
     public class Speciality
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string SpecialityName { get; set; }
     }
 }

@@ -8,8 +8,6 @@ namespace WebApi.Models.Tests
     public class Summary
     {
         public int Id { get; set; }
-        public int QuestionId { get; set; }
-        public int AnswerId { get; set; }
         public Answer Answer { get; set; }
         public Question Question { get; set; }
     }

@@ -9,7 +9,7 @@ namespace WebApi.Models.Users
     public class Course
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public int CorseNumber { get; set; }
     }
 }

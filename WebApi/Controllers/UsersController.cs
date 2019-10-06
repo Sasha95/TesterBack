@@ -15,70 +15,64 @@ namespace WebApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        //private readonly ApplicationContext _context;
+        private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public UsersController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UsersController(ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-           // _context = context;
-
-            //if (!_context.User.Any())
-            //{
-            //    _context.User.Add(new User { Email = "admin@mail.ru", Password = "123" });
-            //    _context.SaveChangesAsync();
-            //}
+            _context = context;
         }
 
         // GET: api/Users
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<User>>> GetUser()
-        //{
-        //    return await _context.User.ToListAsync();
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        {
+            return await _context.Users.ToListAsync();
+        }
 
-        // GET: api/Users/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<User>> GetUser(Guid id)
-        //{
-        //    var user = await _context.User.FirstOrDefaultAsync(x => x.Id == id);
-
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return new ObjectResult(user);
-        //}
 
         // PUT: api/Users
-        //[HttpPut]
-        //public IActionResult Put([FromBody]User user)
-        //{
-        //    if (user == null)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut]
+        public IActionResult Put([FromBody]User user)
+        {
+            if (user == null)
+            {
+                return BadRequest();
+            }
 
-        //    if (!_context.User.Any(x => x.Id == user.Id))
-        //    {
-        //        return NotFound();
-        //    }
+            if (!_context.Users.Any(x => x.Id == user.Id))
+            {
+                return NotFound();
+            }
 
-        //    _context.Update(user);
-        //    _context.SaveChangesAsync();
-        //    return Ok(user);
-        //}
+            _context.Update(user);
+            _context.SaveChangesAsync();
+            return Ok(user);
+        }
 
         // POST: api/Users
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]User model)
         {
+            if (model == null)
+            {
+                ModelState.AddModelError("", "Не указаны данные для пользователя");
+                return BadRequest(ModelState);
+            }
+            //проверяем существует ли в базе такое мыло
+            if (_context.Users.Any(x => x.Email == model.Email))
+            {
+                ModelState.AddModelError("Email", "Такой пользователь уже существует!");
+            }
+
+            //если в ModelState нет ошибок то создаем пользователя
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, ConfirmPassword = model.Password };
+                //надо создать таблицу ролей
+                User user = new User { Email = model.Email };//UserName = model.Email 
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -86,32 +80,11 @@ namespace WebApi.Controllers
                     //await _signInManager.SignInAsync(user, false);
                     return Ok();
                 }
-                else return BadRequest();
+                else return BadRequest(ModelState);
             }
 
             return BadRequest();
 
         }
-
-        //// DELETE: api/Users/5
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(Guid id)
-        //{
-        //    User user = _context.User.FirstOrDefault(x => x.Id == id);
-
-        //    if (user == null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _context.User.Remove(user);
-        //    _context.SaveChangesAsync();
-        //    return Ok(user);
-        //}
-
-        //private bool UserExists(Guid id)
-        //{
-        //    return _context.User.Any(e => e.Id == id);
-        //}
     }
 }

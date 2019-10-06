@@ -9,7 +9,7 @@ namespace WebApi.Models.Users
     public class Role
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string RoleName { get; set; }
     }
 }

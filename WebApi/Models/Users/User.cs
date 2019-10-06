@@ -14,8 +14,10 @@ namespace WebApi.Models.Users
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        public int UserRoleId { get; set; }
-        public UserRole UserRole { get; set; }
+        [Required]
+        public int RoleId { get; set; }
+
+        public Role Role { get; set; }
 
     }
 }

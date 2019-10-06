@@ -33,18 +33,12 @@ namespace WebApi.Models.Domain
             string superAdmin = "super_admin";
             string teacherRoleName = "teacher";
 
-            Role superAdminRole = new Role { Id = 1, RoleName = superAdmin };
-            Role teacherRole = new Role { Id = 2, RoleName = teacherRoleName };
-            Role studentRole = new Role { Id = 3, RoleName = studentRoleName };
-            Role adminRole = new Role { Id = 4, RoleName = adminRoleName };
-
-            UserRole super_admin = new UserRole { Id = 1, RoleId = superAdminRole.Id };
-            UserRole student = new UserRole { Id = 2, RoleId = studentRole.Id };
-            UserRole teacher = new UserRole { Id = 3, RoleId = teacherRole.Id };
-            UserRole admin = new UserRole { Id = 4, RoleId = adminRole.Id };
+            Role superAdminRole = new Role { Id = 1, Name = superAdmin };
+            Role teacherRole = new Role { Id = 2, Name = teacherRoleName };
+            Role studentRole = new Role { Id = 3, Name = studentRoleName };
+            Role adminRole = new Role { Id = 4, Name = adminRoleName };
 
             modelBuilder.Entity<Role>().HasData(new Role[] { superAdminRole, studentRole, teacherRole, adminRole });
-            modelBuilder.Entity<UserRole>().HasData(new UserRole[] { admin, super_admin, student, teacher });
 
             modelBuilder.Entity<Speciality>().HasData(new Speciality() { Id = 1, SpecialityName = "Физика" });
             modelBuilder.Entity<Speciality>().HasData(new Speciality() { Id = 2, SpecialityName = "Химия" });
@@ -59,24 +53,12 @@ namespace WebApi.Models.Domain
         }
 
         //набор таблиц для управления пользователями
-        //public DbSet<Course> Courses { get; set; }
-        //public DbSet<Role> Roles { get; set; }
-        //public DbSet<Speciality> Specialities { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserInfo> UsersInfo { get; set; }
-        //public DbSet<UserRole> UserRoles { get; set; }
-
 
         //набор таблиц для тестов
-        //public DbSet<Answer> Answers { get; set; }
-        //public DbSet<Branch> Branches { get; set; }
-        //public DbSet<Question> Questions { get; set; }
-        //public DbSet<Session> Sessions { get; set; }
-        //public DbSet<Subject> Subjects { get; set; }
-        //public DbSet<Summary> Summaries { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestInfo> TestsInfo { get; set; }
-        //public DbSet<Topic> Topics { get; set; }
         public DbSet<UserAnswer> UserAnswers { get; set; }
     }
 }

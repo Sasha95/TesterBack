@@ -10,6 +10,8 @@ namespace WebApi.Models.Users
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public int CorseNumber { get; set; }
     }
 }

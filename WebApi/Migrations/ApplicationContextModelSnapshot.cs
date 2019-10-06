@@ -25,7 +25,8 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AnswerText");
+                    b.Property<string>("AnswerText")
+                        .IsRequired();
 
                     b.Property<bool>("Realy");
 
@@ -40,7 +41,8 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BranchText");
+                    b.Property<string>("BranchText")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -53,7 +55,8 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("QuestionText");
+                    b.Property<string>("QuestionText")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -68,15 +71,14 @@ namespace WebApi.Migrations
 
                     b.Property<int>("TestId");
 
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("UserId1");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("TestId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Session");
                 });
@@ -89,7 +91,8 @@ namespace WebApi.Migrations
 
                     b.Property<int>("BranchId");
 
-                    b.Property<string>("SubjectText");
+                    b.Property<string>("SubjectText")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -104,9 +107,9 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AnswerId");
+                    b.Property<int>("AnswerId");
 
-                    b.Property<int?>("QuestionId");
+                    b.Property<int>("QuestionId");
 
                     b.HasKey("Id");
 
@@ -125,7 +128,8 @@ namespace WebApi.Migrations
 
                     b.Property<int>("SummaryId");
 
-                    b.Property<string>("TestText");
+                    b.Property<string>("TestText")
+                        .IsRequired();
 
                     b.Property<int>("TopicId");
 
@@ -165,7 +169,8 @@ namespace WebApi.Migrations
 
                     b.Property<int>("SubjectId");
 
-                    b.Property<string>("TopicText");
+                    b.Property<string>("TopicText")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -248,7 +253,8 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("RoleName");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -258,22 +264,22 @@ namespace WebApi.Migrations
                         new
                         {
                             Id = 1,
-                            RoleName = "super_admin"
+                            Name = "super_admin"
                         },
                         new
                         {
                             Id = 3,
-                            RoleName = "student"
+                            Name = "student"
                         },
                         new
                         {
                             Id = 2,
-                            RoleName = "teacher"
+                            Name = "teacher"
                         },
                         new
                         {
                             Id = 4,
-                            RoleName = "admin"
+                            Name = "admin"
                         });
                 });
 
@@ -283,7 +289,8 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("SpecialityName");
+                    b.Property<string>("SpecialityName")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -321,11 +328,11 @@ namespace WebApi.Migrations
 
                     b.Property<string>("PasswordHash");
 
-                    b.Property<int>("UserRoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserRoleId");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -345,7 +352,8 @@ namespace WebApi.Migrations
 
                     b.Property<int>("SpecialityId");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -358,43 +366,6 @@ namespace WebApi.Migrations
                     b.ToTable("UsersInfo");
                 });
 
-            modelBuilder.Entity("WebApi.Models.Users.UserRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRole");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 4,
-                            RoleId = 4
-                        },
-                        new
-                        {
-                            Id = 1,
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            RoleId = 3
-                        },
-                        new
-                        {
-                            Id = 3,
-                            RoleId = 2
-                        });
-                });
-
             modelBuilder.Entity("WebApi.Models.Tests.Session", b =>
                 {
                     b.HasOne("WebApi.Models.Tests.Test", "Test")
@@ -404,7 +375,8 @@ namespace WebApi.Migrations
 
                     b.HasOne("WebApi.Models.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Subject", b =>
@@ -419,11 +391,13 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.Tests.Answer", "Answer")
                         .WithMany()
-                        .HasForeignKey("AnswerId");
+                        .HasForeignKey("AnswerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WebApi.Models.Tests.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("QuestionId");
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Test", b =>
@@ -480,9 +454,9 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Users.User", b =>
                 {
-                    b.HasOne("WebApi.Models.Users.UserRole", "UserRole")
+                    b.HasOne("WebApi.Models.Users.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("UserRoleId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -500,14 +474,7 @@ namespace WebApi.Migrations
 
                     b.HasOne("WebApi.Models.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("WebApi.Models.Users.UserRole", b =>
-                {
-                    b.HasOne("WebApi.Models.Users.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

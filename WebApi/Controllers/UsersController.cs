@@ -55,13 +55,14 @@ namespace WebApi.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]User model)
+        public async Task<IActionResult> CreateUser([FromBody]User model)
         {
             if (model == null)
             {
                 ModelState.AddModelError("", "Не указаны данные для пользователя");
                 return BadRequest(ModelState);
             }
+
             //проверяем существует ли в базе такое мыло
             if (_context.Users.Any(x => x.Email == model.Email))
             {
@@ -72,7 +73,7 @@ namespace WebApi.Controllers
             if (ModelState.IsValid)
             {
                 //надо создать таблицу ролей
-                User user = new User { Email = model.Email };//UserName = model.Email 
+                User user = new User { Email = model.Email, RoleId = model.RoleId };//UserName = model.Email 
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

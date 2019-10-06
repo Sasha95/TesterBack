@@ -9,10 +9,13 @@ namespace WebApi.Models.Tests
 {
     public class Session
     {
+        [Key]
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int TestId { get; set; }
+
+        [Required]
         public Test Test { get; set; }
+
+        [Required]
         public User User { get; set; }
         
     }

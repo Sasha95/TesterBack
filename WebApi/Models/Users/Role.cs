@@ -10,6 +10,8 @@ namespace WebApi.Models.Users
     {
         [Key]
         public int Id { get; set; }
-        public string RoleName { get; set; }
+
+        [Required]
+        public string Name { get; set; }
     }
 }

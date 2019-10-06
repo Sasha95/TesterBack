@@ -94,7 +94,7 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SubjectText = table.Column<string>(nullable: false),
-                    BranchId = table.Column<int>(nullable: false)
+                    BranchId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,7 +104,7 @@ namespace WebApi.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branch",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,7 +186,7 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TopicText = table.Column<string>(nullable: false),
-                    SubjectId = table.Column<int>(nullable: false)
+                    SubjectId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -196,7 +196,7 @@ namespace WebApi.Migrations
                         column: x => x.SubjectId,
                         principalTable: "Subject",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,8 +241,8 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TestText = table.Column<string>(nullable: false),
-                    TopicId = table.Column<int>(nullable: false),
-                    SummaryId = table.Column<int>(nullable: false)
+                    TopicId = table.Column<int>(nullable: true),
+                    SummaryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,13 +252,13 @@ namespace WebApi.Migrations
                         column: x => x.SummaryId,
                         principalTable: "Summary",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Tests_Topic_TopicId",
                         column: x => x.TopicId,
                         principalTable: "Topic",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -305,19 +305,19 @@ namespace WebApi.Migrations
                         column: x => x.AnswerId,
                         principalTable: "Answer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);//delete
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserAnswers_Question_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Question",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);//delete
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserAnswers_Session_SessionId",
                         column: x => x.SessionId,
                         principalTable: "Session",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);//delete
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(

@@ -10,7 +10,7 @@ using WebApi.Models.Domain;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191003071415__initial")]
+    [Migration("20191006172218__initial")]
     partial class _initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,7 +91,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BranchId");
+                    b.Property<int?>("BranchId");
 
                     b.Property<string>("SubjectText")
                         .IsRequired();
@@ -128,12 +128,12 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("SummaryId");
+                    b.Property<int?>("SummaryId");
 
                     b.Property<string>("TestText")
                         .IsRequired();
 
-                    b.Property<int>("TopicId");
+                    b.Property<int?>("TopicId");
 
                     b.HasKey("Id");
 
@@ -169,7 +169,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("SubjectId");
+                    b.Property<int?>("SubjectId");
 
                     b.Property<string>("TopicText")
                         .IsRequired();
@@ -385,8 +385,7 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.Tests.Branch", "Branch")
                         .WithMany()
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BranchId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Summary", b =>
@@ -406,13 +405,11 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.Tests.Summary", "Summary")
                         .WithMany()
-                        .HasForeignKey("SummaryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SummaryId");
 
                     b.HasOne("WebApi.Models.Tests.Topic", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TopicId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.TestInfo", b =>
@@ -432,8 +429,7 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.Tests.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SubjectId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.UserAnswer", b =>

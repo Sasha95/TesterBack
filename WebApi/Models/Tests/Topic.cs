@@ -14,7 +14,6 @@ namespace WebApi.Models.Tests
         [Required]
         public string TopicText { get; set; }
 
-        [Required]
         public Subject Subject { get; set; }
     }
 }

@@ -14,7 +14,8 @@ namespace WebApi.Models.Tests
         [Required]
         public string SubjectText { get; set; }
 
-        [Required]
         public Branch Branch { get; set; }
+
+        public int BranchId { get; set; }
     }
 }

@@ -14,11 +14,13 @@ namespace WebApi.Models.Tests
         [Required]
         public string TestText { get; set; }
 
-        [Required]
         public Topic Topic { get; set; }
 
-        [Required]
-        public Summary Summary { get; set; }
+        public int? TopicId { get; set; }
+
+        public Question Question { get; set; }
+
+        public int? QuestionId { get; set; }
 
     }
 }

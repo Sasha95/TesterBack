@@ -11,10 +11,12 @@ namespace WebApi.Models.Tests
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public Answer Answer { get; set; }
 
-        [Required]
+        public int AnswerId { get; set; }
+
         public Question Question { get; set; }
+
+        public int QuestionId { get; set; }
     }
 }

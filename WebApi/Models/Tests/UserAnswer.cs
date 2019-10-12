@@ -11,13 +11,19 @@ namespace WebApi.Models.Tests
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public Question Question { get; set; }
 
         [Required]
+        public int QuestionId { get; set; }
+
         public Answer Answer { get; set; }
 
         [Required]
+        public int AnswerId { get; set; }
+
         public Session Session { get; set; }
+
+        [Required]
+        public int SessionId { get; set; }
     }
 }

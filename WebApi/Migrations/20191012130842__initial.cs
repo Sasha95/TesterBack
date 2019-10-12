@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.Migrations
@@ -9,7 +8,7 @@ namespace WebApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Answer",
+                name: "Answers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -19,11 +18,11 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Answer", x => x.Id);
+                    table.PrimaryKey("PK_Answers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Branch",
+                name: "Branches",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -32,11 +31,11 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Branch", x => x.Id);
+                    table.PrimaryKey("PK_Branches", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Course",
+                name: "Courses",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -45,11 +44,11 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Course", x => x.Id);
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Question",
+                name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -58,11 +57,11 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Question", x => x.Id);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -71,11 +70,11 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Speciality",
+                name: "Specialities",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -84,11 +83,11 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Speciality", x => x.Id);
+                    table.PrimaryKey("PK_Specialities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Subject",
+                name: "Subjects",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -98,17 +97,17 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Subject", x => x.Id);
+                    table.PrimaryKey("PK_Subjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Subject_Branch_BranchId",
+                        name: "FK_Subjects_Branches_BranchId",
                         column: x => x.BranchId,
-                        principalTable: "Branch",
+                        principalTable: "Branches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Summary",
+                name: "Summaries",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -118,43 +117,17 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Summary", x => x.Id);
+                    table.PrimaryKey("PK_Summaries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Summary_Answer_AnswerId",
+                        name: "FK_Summaries_Answers_AnswerId",
                         column: x => x.AnswerId,
-                        principalTable: "Answer",
+                        principalTable: "Answers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Summary_Question_QuestionId",
+                        name: "FK_Summaries_Questions_QuestionId",
                         column: x => x.QuestionId,
-                        principalTable: "Question",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TestsInfo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AnswerId = table.Column<int>(nullable: false),
-                    QuestionId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestsInfo", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TestsInfo_Answer_AnswerId",
-                        column: x => x.AnswerId,
-                        principalTable: "Answer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TestsInfo_Question_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Question",
+                        principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -172,15 +145,15 @@ namespace WebApi.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Role_RoleId",
+                        name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Role",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Topic",
+                name: "Topics",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -190,11 +163,11 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Topic", x => x.Id);
+                    table.PrimaryKey("PK_Topics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Topic_Subject_SubjectId",
+                        name: "FK_Topics_Subjects_SubjectId",
                         column: x => x.SubjectId,
-                        principalTable: "Subject",
+                        principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -203,7 +176,8 @@ namespace WebApi.Migrations
                 name: "UsersInfo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: true),
                     MiddleName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -215,15 +189,15 @@ namespace WebApi.Migrations
                 {
                     table.PrimaryKey("PK_UsersInfo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsersInfo_Course_CourseId",
+                        name: "FK_UsersInfo_Courses_CourseId",
                         column: x => x.CourseId,
-                        principalTable: "Course",
+                        principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersInfo_Speciality_SpecialityId",
+                        name: "FK_UsersInfo_Specialities_SpecialityId",
                         column: x => x.SpecialityId,
-                        principalTable: "Speciality",
+                        principalTable: "Specialities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -241,46 +215,46 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TestText = table.Column<string>(nullable: false),
-                    TopicId = table.Column<int>(nullable: false),
-                    SummaryId = table.Column<int>(nullable: false)
+                    TopicId = table.Column<int>(nullable: true),
+                    QuestionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tests_Summary_SummaryId",
-                        column: x => x.SummaryId,
-                        principalTable: "Summary",
+                        name: "FK_Tests_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Tests_Topic_TopicId",
+                        name: "FK_Tests_Topics_TopicId",
                         column: x => x.TopicId,
-                        principalTable: "Topic",
+                        principalTable: "Topics",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Session",
+                name: "Sessions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TestId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    TestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Session", x => x.Id);
+                    table.PrimaryKey("PK_Sessions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Session_Tests_TestId",
+                        name: "FK_Sessions_Tests_TestId",
                         column: x => x.TestId,
                         principalTable: "Tests",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Session_Users_UserId",
+                        name: "FK_Sessions_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -301,89 +275,126 @@ namespace WebApi.Migrations
                 {
                     table.PrimaryKey("PK_UserAnswers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserAnswers_Answer_AnswerId",
+                        name: "FK_UserAnswers_Answers_AnswerId",
                         column: x => x.AnswerId,
-                        principalTable: "Answer",
+                        principalTable: "Answers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);//delete
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserAnswers_Question_QuestionId",
+                        name: "FK_UserAnswers_Questions_QuestionId",
                         column: x => x.QuestionId,
-                        principalTable: "Question",
+                        principalTable: "Questions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);//delete
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserAnswers_Session_SessionId",
+                        name: "FK_UserAnswers_Sessions_SessionId",
                         column: x => x.SessionId,
-                        principalTable: "Session",
+                        principalTable: "Sessions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);//delete
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "Course",
+                table: "Answers",
+                columns: new[] { "Id", "AnswerText", "Realy" },
+                values: new object[,]
+                {
+                    { 1, "1799", true },
+                    { 2, "1789", false },
+                    { 3, "1899", false },
+                    { 4, "1801", false }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Branches",
+                columns: new[] { "Id", "BranchText" },
+                values: new object[,]
+                {
+                    { 1, "Химия" },
+                    { 2, "История" },
+                    { 3, "Физика" },
+                    { 4, "Литература" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
                 columns: new[] { "Id", "CorseNumber" },
                 values: new object[,]
                 {
+                    { 6, 6 },
+                    { 5, 5 },
+                    { 4, 4 },
                     { 1, 1 },
                     { 2, 2 },
-                    { 3, 3 },
-                    { 4, 4 },
-                    { 5, 5 },
-                    { 6, 6 }
+                    { 3, 3 }
                 });
 
             migrationBuilder.InsertData(
-                table: "Role",
+                table: "Questions",
+                columns: new[] { "Id", "QuestionText" },
+                values: new object[] { 1, "Год рождения Пушкина А.С." });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 2, "teacher" },
                     { 1, "super_admin" },
                     { 3, "student" },
-                    { 2, "teacher" },
                     { 4, "admin" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Speciality",
-                columns: new[] { "Id", "SpecialityName" },
+                table: "Subjects",
+                columns: new[] { "Id", "BranchId", "SubjectText" },
+                values: new object[] { 1, 4, "Русская литература" });
+
+            migrationBuilder.InsertData(
+                table: "Summaries",
+                columns: new[] { "Id", "AnswerId", "QuestionId" },
                 values: new object[,]
                 {
-                    { 1, "Физика" },
-                    { 2, "Химия" },
-                    { 3, "Алгебра" },
-                    { 4, "Биология" }
+                    { 1, 1, 1 },
+                    { 2, 2, 1 },
+                    { 3, 3, 1 },
+                    { 4, 4, 1 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "Id", "SubjectId", "TopicText" },
+                values: new object[] { 1, 1, "Поэты 18 века" });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Session_TestId",
-                table: "Session",
+                name: "IX_Sessions_TestId",
+                table: "Sessions",
                 column: "TestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Session_UserId",
-                table: "Session",
+                name: "IX_Sessions_UserId",
+                table: "Sessions",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subject_BranchId",
-                table: "Subject",
+                name: "IX_Subjects_BranchId",
+                table: "Subjects",
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Summary_AnswerId",
-                table: "Summary",
+                name: "IX_Summaries_AnswerId",
+                table: "Summaries",
                 column: "AnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Summary_QuestionId",
-                table: "Summary",
+                name: "IX_Summaries_QuestionId",
+                table: "Summaries",
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tests_SummaryId",
+                name: "IX_Tests_QuestionId",
                 table: "Tests",
-                column: "SummaryId");
+                column: "QuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tests_TopicId",
@@ -391,18 +402,8 @@ namespace WebApi.Migrations
                 column: "TopicId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TestsInfo_AnswerId",
-                table: "TestsInfo",
-                column: "AnswerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TestsInfo_QuestionId",
-                table: "TestsInfo",
-                column: "QuestionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Topic_SubjectId",
-                table: "Topic",
+                name: "IX_Topics_SubjectId",
+                table: "Topics",
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
@@ -444,7 +445,7 @@ namespace WebApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TestsInfo");
+                name: "Summaries");
 
             migrationBuilder.DropTable(
                 name: "UserAnswers");
@@ -453,13 +454,16 @@ namespace WebApi.Migrations
                 name: "UsersInfo");
 
             migrationBuilder.DropTable(
-                name: "Session");
+                name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Course");
+                name: "Sessions");
 
             migrationBuilder.DropTable(
-                name: "Speciality");
+                name: "Courses");
+
+            migrationBuilder.DropTable(
+                name: "Specialities");
 
             migrationBuilder.DropTable(
                 name: "Tests");
@@ -468,25 +472,19 @@ namespace WebApi.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Summary");
+                name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Topic");
+                name: "Topics");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Answer");
+                name: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "Question");
-
-            migrationBuilder.DropTable(
-                name: "Subject");
-
-            migrationBuilder.DropTable(
-                name: "Branch");
+                name: "Branches");
         }
     }
 }

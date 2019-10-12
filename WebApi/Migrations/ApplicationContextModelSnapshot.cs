@@ -32,7 +32,33 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Answer");
+                    b.ToTable("Answers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AnswerText = "1799",
+                            Realy = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AnswerText = "1789",
+                            Realy = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AnswerText = "1899",
+                            Realy = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AnswerText = "1801",
+                            Realy = false
+                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Branch", b =>
@@ -46,7 +72,29 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Branch");
+                    b.ToTable("Branches");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BranchText = "Химия"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BranchText = "История"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BranchText = "Физика"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BranchText = "Литература"
+                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Question", b =>
@@ -60,7 +108,14 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            QuestionText = "Год рождения Пушкина А.С."
+                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Session", b =>
@@ -69,7 +124,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("TestId");
+                    b.Property<int?>("TestId");
 
                     b.Property<string>("UserId")
                         .IsRequired();
@@ -80,7 +135,7 @@ namespace WebApi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Session");
+                    b.ToTable("Sessions");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Subject", b =>
@@ -98,7 +153,15 @@ namespace WebApi.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BranchId = 4,
+                            SubjectText = "Русская литература"
+                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Summary", b =>
@@ -117,7 +180,33 @@ namespace WebApi.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Summary");
+                    b.ToTable("Summaries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AnswerId = 1,
+                            QuestionId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AnswerId = 2,
+                            QuestionId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AnswerId = 3,
+                            QuestionId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AnswerId = 4,
+                            QuestionId = 1
+                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Test", b =>
@@ -126,39 +215,20 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("SummaryId");
+                    b.Property<int?>("QuestionId");
 
                     b.Property<string>("TestText")
                         .IsRequired();
 
-                    b.Property<int>("TopicId");
+                    b.Property<int?>("TopicId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SummaryId");
+                    b.HasIndex("QuestionId");
 
                     b.HasIndex("TopicId");
 
                     b.ToTable("Tests");
-                });
-
-            modelBuilder.Entity("WebApi.Models.Tests.TestInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AnswerId");
-
-                    b.Property<int>("QuestionId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnswerId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("TestsInfo");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Topic", b =>
@@ -176,7 +246,15 @@ namespace WebApi.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Topic");
+                    b.ToTable("Topics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            SubjectId = 1,
+                            TopicText = "Поэты 18 века"
+                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.UserAnswer", b =>
@@ -212,7 +290,7 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
 
                     b.HasData(
                         new
@@ -258,7 +336,7 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
@@ -294,29 +372,7 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Speciality");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            SpecialityName = "Физика"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            SpecialityName = "Химия"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            SpecialityName = "Алгебра"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            SpecialityName = "Биология"
-                        });
+                    b.ToTable("Specialities");
                 });
 
             modelBuilder.Entity("WebApi.Models.Users.User", b =>
@@ -339,8 +395,9 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Users.UserInfo", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CourseId");
 
@@ -370,8 +427,7 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.Tests.Test", "Test")
                         .WithMany()
-                        .HasForeignKey("TestId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TestId");
 
                     b.HasOne("WebApi.Models.Users.User", "User")
                         .WithMany()
@@ -402,28 +458,13 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Tests.Test", b =>
                 {
-                    b.HasOne("WebApi.Models.Tests.Summary", "Summary")
+                    b.HasOne("WebApi.Models.Tests.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("SummaryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("QuestionId");
 
                     b.HasOne("WebApi.Models.Tests.Topic", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebApi.Models.Tests.TestInfo", b =>
-                {
-                    b.HasOne("WebApi.Models.Tests.Answer", "Answer")
-                        .WithMany()
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("WebApi.Models.Tests.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TopicId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Topic", b =>

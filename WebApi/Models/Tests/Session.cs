@@ -13,10 +13,8 @@ namespace WebApi.Models.Tests
         public int Id { get; set; }
 
         [Required]
-        public Test Test { get; set; }
-
-        [Required]
         public User User { get; set; }
-        
+
+        public Test Test { get; set; }
     }
 }

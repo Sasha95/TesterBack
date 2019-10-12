@@ -17,10 +17,8 @@ namespace WebApi.Models.Tests
         [Required]
         public int QuestionId { get; set; }
 
-        [Required]
         public Answer Answer { get; set; }
 
-        [Required]
         public Question Question { get; set; }
     }
 }

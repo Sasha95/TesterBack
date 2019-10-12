@@ -93,7 +93,7 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SubjectText = table.Column<string>(nullable: false),
-                    BranchId = table.Column<int>(nullable: false)
+                    BranchId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,7 +103,7 @@ namespace WebApi.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -159,7 +159,7 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TopicText = table.Column<string>(nullable: false),
-                    SubjectId = table.Column<int>(nullable: false)
+                    SubjectId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -169,7 +169,7 @@ namespace WebApi.Migrations
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

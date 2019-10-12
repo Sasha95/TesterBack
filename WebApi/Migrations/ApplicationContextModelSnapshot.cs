@@ -144,7 +144,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BranchId");
+                    b.Property<int?>("BranchId");
 
                     b.Property<string>("SubjectText")
                         .IsRequired();
@@ -237,7 +237,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("SubjectId");
+                    b.Property<int?>("SubjectId");
 
                     b.Property<string>("TopicText")
                         .IsRequired();
@@ -439,8 +439,7 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.Tests.Branch", "Branch")
                         .WithMany()
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BranchId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Summary", b =>
@@ -471,8 +470,7 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.Tests.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SubjectId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.UserAnswer", b =>

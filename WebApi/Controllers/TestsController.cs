@@ -115,7 +115,7 @@ namespace WebApi.Controllers
 
 		//decision true or false
 		[Route("Decision")]
-		public async Task<ActionResult<Summary>> Decision(Summary summary)
+		public async Task<ActionResult> Decision( )
 		{
 			if (true)//у вопроса больше одного ответа
 			{
@@ -129,15 +129,7 @@ namespace WebApi.Controllers
 		}
 
 
-		//add summary
-		[Route("AddSummary")]
-        public async Task<ActionResult<Summary>> AddSummary(Summary summary)
-        {
-            _context.Summaries.Add(summary);
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
+		
 
         //add topic
         [Route("AddTopic")]

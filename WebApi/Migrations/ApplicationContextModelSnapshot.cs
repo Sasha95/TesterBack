@@ -64,9 +64,15 @@ namespace WebApi.Migrations
                     b.Property<string>("QuestionText")
                         .IsRequired();
 
+                    b.Property<int>("TypeId");
+
+                    b.Property<int?>("TypeQuestionId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AnswerId");
+
+                    b.HasIndex("TypeQuestionId");
 
                     b.ToTable("Questions");
                 });
@@ -108,25 +114,6 @@ namespace WebApi.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("WebApi.Models.Tests.Summary", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AnswerId");
-
-                    b.Property<int>("QuestionId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnswerId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("Summaries");
-                });
-
             modelBuilder.Entity("WebApi.Models.Tests.Test", b =>
                 {
                     b.Property<int>("Id")
@@ -165,6 +152,20 @@ namespace WebApi.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("WebApi.Models.Tests.TypeQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Type")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeQuestion");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.UserAnswer", b =>
@@ -291,6 +292,10 @@ namespace WebApi.Migrations
                     b.HasOne("WebApi.Models.Tests.Answer", "Answer")
                         .WithMany()
                         .HasForeignKey("AnswerId");
+
+                    b.HasOne("WebApi.Models.Tests.TypeQuestion", "TypeQuestion")
+                        .WithMany()
+                        .HasForeignKey("TypeQuestionId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Session", b =>
@@ -310,19 +315,6 @@ namespace WebApi.Migrations
                     b.HasOne("WebApi.Models.Tests.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebApi.Models.Tests.Summary", b =>
-                {
-                    b.HasOne("WebApi.Models.Tests.Answer", "Answer")
-                        .WithMany()
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("WebApi.Models.Tests.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

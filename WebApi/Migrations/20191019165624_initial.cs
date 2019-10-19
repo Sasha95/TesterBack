@@ -60,6 +60,19 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TypeQuestion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Type = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TypeQuestion", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Subjects",
                 columns: table => new
                 {
@@ -163,11 +176,19 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     QuestionText = table.Column<string>(nullable: false),
-                    AnswerId = table.Column<int>(nullable: true)
+                    AnswerId = table.Column<int>(nullable: true),
+                    TypeId = table.Column<int>(nullable: false),
+                    TypeQuestionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_TypeQuestion_TypeQuestionId",
+                        column: x => x.TypeQuestionId,
+                        principalTable: "TypeQuestion",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,32 +237,6 @@ namespace WebApi.Migrations
                         principalTable: "Topics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Summaries",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AnswerId = table.Column<int>(nullable: false),
-                    QuestionId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Summaries", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Summaries_Answers_AnswerId",
-                        column: x => x.AnswerId,
-                        principalTable: "Answers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Summaries_Questions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Questions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -314,6 +309,11 @@ namespace WebApi.Migrations
                 column: "AnswerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Questions_TypeQuestionId",
+                table: "Questions",
+                column: "TypeQuestionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sessions_TestId",
                 table: "Sessions",
                 column: "TestId");
@@ -327,16 +327,6 @@ namespace WebApi.Migrations
                 name: "IX_Subjects_BranchId",
                 table: "Subjects",
                 column: "BranchId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Summaries_AnswerId",
-                table: "Summaries",
-                column: "AnswerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Summaries_QuestionId",
-                table: "Summaries",
-                column: "QuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tests_QuestionId",
@@ -404,9 +394,6 @@ namespace WebApi.Migrations
                 table: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Summaries");
-
-            migrationBuilder.DropTable(
                 name: "UserAnswers");
 
             migrationBuilder.DropTable(
@@ -444,6 +431,9 @@ namespace WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Answers");
+
+            migrationBuilder.DropTable(
+                name: "TypeQuestion");
         }
     }
 }

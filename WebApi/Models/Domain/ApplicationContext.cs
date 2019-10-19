@@ -108,6 +108,6 @@ namespace WebApi.Models.Domain
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<Summary> Summaries { get; set; }
+        
     }
 }

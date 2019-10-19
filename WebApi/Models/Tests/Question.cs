@@ -19,5 +19,11 @@ namespace WebApi.Models.Tests
 		public List<Answer> Answers{get; set;}
 
 		public Answer Answer { get; set; }
-    }
+
+		[Required]
+		public int TypeId { get; set; }
+
+		public TypeQuestion TypeQuestion { get; set; }
+
+	}
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.Migrations
 {
-    public partial class _initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -93,7 +93,7 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SubjectText = table.Column<string>(nullable: false),
-                    BranchId = table.Column<int>(nullable: true)
+                    BranchId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,7 +103,7 @@ namespace WebApi.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,7 +136,8 @@ namespace WebApi.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     RoleId = table.Column<int>(nullable: false)
@@ -159,7 +160,7 @@ namespace WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TopicText = table.Column<string>(nullable: false),
-                    SubjectId = table.Column<int>(nullable: true)
+                    SubjectId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -169,7 +170,7 @@ namespace WebApi.Migrations
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,7 +184,7 @@ namespace WebApi.Migrations
                     LastName = table.Column<string>(nullable: true),
                     SpecialityId = table.Column<int>(nullable: false),
                     CourseId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -241,7 +242,7 @@ namespace WebApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -321,12 +322,12 @@ namespace WebApi.Migrations
                 columns: new[] { "Id", "CorseNumber" },
                 values: new object[,]
                 {
-                    { 6, 6 },
-                    { 5, 5 },
-                    { 4, 4 },
                     { 1, 1 },
                     { 2, 2 },
-                    { 3, 3 }
+                    { 3, 3 },
+                    { 4, 4 },
+                    { 5, 5 },
+                    { 6, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -339,11 +340,16 @@ namespace WebApi.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 2, "teacher" },
-                    { 1, "super_admin" },
                     { 3, "student" },
-                    { 4, "admin" }
+                    { 4, "admin" },
+                    { 2, "teacher" },
+                    { 1, "super_admin" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Sessions",
+                columns: new[] { "Id", "TestId", "UserId" },
+                values: new object[] { 1, null, 0 });
 
             migrationBuilder.InsertData(
                 table: "Subjects",
@@ -360,6 +366,11 @@ namespace WebApi.Migrations
                     { 3, 3, 1 },
                     { 4, 4, 1 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "UserAnswers",
+                columns: new[] { "Id", "AnswerId", "QuestionId", "SessionId" },
+                values: new object[] { 1, 1, 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "Topics",

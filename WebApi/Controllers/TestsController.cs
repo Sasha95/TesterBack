@@ -10,101 +10,126 @@ using WebApi.Models.Tests;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class TestsController : ControllerBase
-    {
-        private readonly ApplicationContext _context;
+	[Route("api/[controller]")]
+	[ApiController]
+	public class TestsController : ControllerBase
+	{
+		private readonly ApplicationContext _context;
 
-        public TestsController(ApplicationContext context)
-        {
-            _context = context;
-        }
+		public TestsController(ApplicationContext context)
+		{
+			_context = context;
+		}
 
-        // GET: api/Tests
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Test>>> GetTests()
-        {
-            return await _context.Tests.ToListAsync();
-        }
+		// GET: api/Tests
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<Test>>> GetTests()
+		{
+			return await _context.Tests.ToListAsync();
+		}
 
-        // GET: api/Tests/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Test>> GetTest(int id)
-        {
-            var test = await _context.Tests.FindAsync(id);
+		// GET: api/Tests/5
+		[HttpGet("{id}")]
+		public async Task<ActionResult<Test>> GetTest(int id)
+		{
+			var test = await _context.Tests.FindAsync(id);
 
-            if (test == null)
-            {
-                return NotFound();
-            }
+			if (test == null)
+			{
+				return NotFound();
+			}
 
-            return test;
-        }
+			return test;
+		}
 
-        // PUT: api/Tests/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTest(int id, Test test)
-        {
-            if (id != test.Id)
-            {
-                return BadRequest();
-            }
+		// PUT: api/Tests/5
+		[HttpPut("{id}")]
+		public async Task<IActionResult> PutTest(int id, Test test)
+		{
+			if (id != test.Id)
+			{
+				return BadRequest();
+			}
 
-            _context.Entry(test).State = EntityState.Modified;
+			_context.Entry(test).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TestExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			try
+			{
+				await _context.SaveChangesAsync();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!TestExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
-        //add test 
-        [Route("AddTest")]
-        public async Task<ActionResult<Test>> AddTest(Test test)
-        {
-            _context.Tests.Add(test);
-            await _context.SaveChangesAsync();
+		//add test 
+		[Route("AddTest")]
+		public async Task<ActionResult<Test>> AddTest(Test test)
+		{
+			_context.Tests.Add(test);
+			await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTest", new { id = test.Id }, test);
-        }
+			return CreatedAtAction("GetTest", new { id = test.Id }, test);
+		}
 
-        //add question 
-        [Route("AddQuestion")]
-        public async Task<ActionResult<Question>> AddQuestion(Question question)
-        {
-            _context.Questions.Add(question);
-            await _context.SaveChangesAsync();
+		//add question 
+		[Route("AddQuestion")]
+		public async Task<ActionResult<Question>> AddQuestion(Question question)
+		{
+			_context.Questions.Add(question);
+			await _context.SaveChangesAsync();
 
-            return Ok();
-        }
+			return Ok();
+		}
 
-        //add answer
-        [Route("AddAnswer")]
-        public async Task<ActionResult<Answer>> AddAnswer(Answer answer)
-        {
-            _context.Answers.Add(answer);
-            await _context.SaveChangesAsync();
+		//add answer
+		[Route("AddAnswer")]
+		public async Task<ActionResult<Answer>> AddAnswer(Answer answer)
+		{
+			_context.Answers.Add(answer);
+			await _context.SaveChangesAsync();
 
-            return Ok();
-        }
+			return Ok();
+		}
+
+		//add UserAnswer
+		[Route("AddUserAnswer")]
+		public async Task<ActionResult<UserAnswer>> AddUserAnswer(UserAnswer userAnswer)
+		{
+			_context.UserAnswers.Add(userAnswer);
+			//_context.UserAnswer.Add(userAnswer);
+			await _context.SaveChangesAsync();
+
+			return Ok();
+		}
+
+		//decision true or false
+		[Route("decision")]
+		public async Task<ActionResult<Summary>> decision(Summary summary)
+		{
+			if (true)//у вопроса больше одного ответа
+			{
+
+			}
+			else //если ответ единственно верный, а => это мат выражение, пропускаем через вольфрам ответы автора теста и студента
+			{
+
+			}
+		}
 
 
-        //add summary
-        [Route("AddSummary")]
+		//add summary
+		[Route("AddSummary")]
         public async Task<ActionResult<Summary>> AddSummary(Summary summary)
         {
             _context.Summaries.Add(summary);

@@ -76,6 +76,11 @@ namespace WebApi.Models.Domain
             modelBuilder.Entity<Summary>().HasData(new Summary() { Id = 3, QuestionId = 1, AnswerId = 3 });
             modelBuilder.Entity<Summary>().HasData(new Summary() { Id = 4, QuestionId = 1, AnswerId = 4 });
 
+			modelBuilder.Entity<Session>().HasData(new Session() {Id =1, Test = null });
+
+			//add answer to UsweAnswer table
+			modelBuilder.Entity<UserAnswer>().HasData(new UserAnswer() { Id = 1, QuestionId = 1, SessionId = 1, AnswerId = 1});
+
         }
 
         //набор таблиц для управления пользователями

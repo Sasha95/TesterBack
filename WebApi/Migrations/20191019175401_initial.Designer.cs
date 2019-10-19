@@ -10,7 +10,7 @@ using WebApi.Models.Domain;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191019165624_initial")]
+    [Migration("20191019175401_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,6 +177,8 @@ namespace WebApi.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AnswerId");
+
+                    b.Property<string>("FreeAnswer");
 
                     b.Property<int>("QuestionId");
 

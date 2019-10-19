@@ -19,12 +19,16 @@ namespace WebApi.Models.Tests
 
         public Answer Answer { get; set; }
 
-        [Required]
+        
         public int AnswerId { get; set; } // поле для хранения ссылки на один из вариантов предоставленных преподователем
+
+		public string FreeAnswer { get; set; } //поле для хранения свободного ответа
 
         public Session Session { get; set; }
 
         [Required]
         public int SessionId { get; set; }
+
+
     }
 }

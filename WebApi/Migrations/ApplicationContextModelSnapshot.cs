@@ -176,6 +176,8 @@ namespace WebApi.Migrations
 
                     b.Property<int>("AnswerId");
 
+                    b.Property<string>("FreeAnswer");
+
                     b.Property<int>("QuestionId");
 
                     b.Property<int>("SessionId");

@@ -273,6 +273,7 @@ namespace WebApi.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     QuestionId = table.Column<int>(nullable: false),
                     AnswerId = table.Column<int>(nullable: false),
+                    FreeAnswer = table.Column<string>(nullable: true),
                     SessionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

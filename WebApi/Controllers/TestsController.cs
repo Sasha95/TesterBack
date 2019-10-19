@@ -114,8 +114,8 @@ namespace WebApi.Controllers
 		}
 
 		//decision true or false
-		[Route("decision")]
-		public async Task<ActionResult<Summary>> decision(Summary summary)
+		[Route("Decision")]
+		public async Task<ActionResult<Summary>> Decision(Summary summary)
 		{
 			if (true)//у вопроса больше одного ответа
 			{
@@ -125,6 +125,7 @@ namespace WebApi.Controllers
 			{
 
 			}
+			return Ok();
 		}
 
 

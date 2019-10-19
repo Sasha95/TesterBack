@@ -10,7 +10,7 @@ using WebApi.Models.Domain;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191013113315_initial")]
+    [Migration("20191019145346_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,37 +30,15 @@ namespace WebApi.Migrations
                     b.Property<string>("AnswerText")
                         .IsRequired();
 
+                    b.Property<int?>("QuestionId");
+
                     b.Property<bool>("Realy");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Answers");
+                    b.HasIndex("QuestionId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AnswerText = "1799",
-                            Realy = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AnswerText = "1789",
-                            Realy = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AnswerText = "1899",
-                            Realy = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AnswerText = "1801",
-                            Realy = false
-                        });
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Branch", b =>
@@ -75,28 +53,6 @@ namespace WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Branches");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BranchText = "Химия"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BranchText = "История"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BranchText = "Физика"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BranchText = "Литература"
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Question", b =>
@@ -105,19 +61,16 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AnswerId");
+
                     b.Property<string>("QuestionText")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions");
+                    b.HasIndex("AnswerId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            QuestionText = "Год рождения Пушкина А.С."
-                        });
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Session", b =>
@@ -137,13 +90,6 @@ namespace WebApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Sessions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            UserId = 0
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Subject", b =>
@@ -162,14 +108,6 @@ namespace WebApi.Migrations
                     b.HasIndex("BranchId");
 
                     b.ToTable("Subjects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BranchId = 4,
-                            SubjectText = "Русская литература"
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Summary", b =>
@@ -189,32 +127,6 @@ namespace WebApi.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Summaries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AnswerId = 1,
-                            QuestionId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AnswerId = 2,
-                            QuestionId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AnswerId = 3,
-                            QuestionId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AnswerId = 4,
-                            QuestionId = 1
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Test", b =>
@@ -255,14 +167,6 @@ namespace WebApi.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Topics");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            SubjectId = 1,
-                            TopicText = "Поэты 18 века"
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.UserAnswer", b =>
@@ -286,15 +190,6 @@ namespace WebApi.Migrations
                     b.HasIndex("SessionId");
 
                     b.ToTable("UserAnswers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AnswerId = 1,
-                            QuestionId = 1,
-                            SessionId = 1
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Users.Course", b =>
@@ -308,38 +203,6 @@ namespace WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CorseNumber = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CorseNumber = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CorseNumber = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CorseNumber = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CorseNumber = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CorseNumber = 6
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Users.Role", b =>
@@ -354,28 +217,6 @@ namespace WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "super_admin"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "student"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "teacher"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "admin"
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Models.Users.Speciality", b =>
@@ -438,6 +279,20 @@ namespace WebApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UsersInfo");
+                });
+
+            modelBuilder.Entity("WebApi.Models.Tests.Answer", b =>
+                {
+                    b.HasOne("WebApi.Models.Tests.Question")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId");
+                });
+
+            modelBuilder.Entity("WebApi.Models.Tests.Question", b =>
+                {
+                    b.HasOne("WebApi.Models.Tests.Answer", "Answer")
+                        .WithMany()
+                        .HasForeignKey("AnswerId");
                 });
 
             modelBuilder.Entity("WebApi.Models.Tests.Session", b =>
